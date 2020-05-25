@@ -55,8 +55,19 @@ const newTransaction = async (req, res) => {
     }
 }
 
+const viewTransactions = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.body.user });
+        const transactions = await Transaction.find({ _id: user.transactions }, { symbol: 1, price: 1, shares: 1, type: 1, createdAt: 1, _id: 0 })
+        res.status(200).json(transactions);
+    } catch (error) {
+        return res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     register,
     login,
-    newTransaction
+    newTransaction,
+    viewTransactions
 }

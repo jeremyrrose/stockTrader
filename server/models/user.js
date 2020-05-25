@@ -11,7 +11,7 @@ const User = new Schema(
         portfolio: { type: Schema.Types.Mixed, default: {} },
         transactions: [{ type: Schema.Types.ObjectId, ref: 'transactions' }]
     },
-    { minimize: false },
+    { minimize: false }, // enables empty portfolio
     { timestamps: true }
 );
 
