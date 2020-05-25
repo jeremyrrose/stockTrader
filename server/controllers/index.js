@@ -37,7 +37,26 @@ const login = async (req, res) => {
 	}
 }
 
+const newTransaction = async (req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.body.user });
+        const transaction = await new Transaction(req.body);
+        if (await transaction.save()) {
+            if (await user.addTransaction(transaction)) {
+                return res.status(201).json(transaction);
+            } else {
+                res.status(500).json({ error: 'User could not be updated.'})
+            }
+        } else {
+            res.status(500).json({ error: 'Transaction could not be created.'})
+        }
+    } catch (error) {
+        return res.status(500).json({ error: error.message })
+    }
+}
+
 module.exports = {
     register,
-    login
+    login,
+    newTransaction
 }
