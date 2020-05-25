@@ -6,14 +6,14 @@ const Transaction = require('../models/transaction');
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 const makeUsers = async () => {
-    const users = [1,2,3,4,5].map(num => {
-        return new User({
+    const userdata = [1,2,3,4,5].map(num => {
+        return {
             email: faker.internet.email(),
-            passwordDigest: '$2b$10$9FlugqroDF0wM3UM8J2S0Or41lJUoxdBlxv0BSZdlY16V4ou4izSa', // fake hash for first seed users
+            password: 'password',
             cashBalance: 5000
-        })
+        }
     })
-    await User.insertMany(users);
+    const users = await User.create(userdata);
     console.log('Created test users!');
     return users;
 }

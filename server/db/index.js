@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 
 const dbName = 'stockTrader';
+let mongoURI = process.env.PROD_MONGODB || process.env.MONGODB_URI || `mongodb://127.0.0.1:27017/${dbName}`
 
 mongoose
-    .connect(`mongodb://127.0.0.1:27017/${dbName}`, { 
+    .connect(mongoURI, { 
         useUnifiedTopology: true, 
         useNewUrlParser: true,
         useCreateIndex: true
