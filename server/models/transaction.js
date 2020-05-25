@@ -12,7 +12,7 @@ const buySell = (string) => {
 // model
 const Transaction = new Schema(
     {
-        userId: { type: Schema.Types.ObjectId, ref: 'users' },
+        user: { type: Schema.Types.ObjectId, ref: 'users', required: true },
         symbol: { type: String, required: true },
         price: Number,
         shares: { type: Number, validate: isInteger },
