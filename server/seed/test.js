@@ -8,6 +8,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 const makeUsers = async () => {
     const userdata = [1,2,3,4,5].map(num => {
         return {
+            name: faker.name.findName(),
             email: faker.internet.email(),
             password: 'password',
             cashBalance: 5000

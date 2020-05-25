@@ -4,6 +4,7 @@ const Transaction = require('../models/transaction');
 
 const register = async (req, res) => {
     const reqUser = {
+        name: req.body.name,
         email: req.body.email,
         password: req.body.password,
         cashBalance: 5000
