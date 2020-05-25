@@ -17,15 +17,18 @@ const User = new Schema(
 
 User.methods.addTransaction = async function (transaction) {
     const user = this;
+    const { symbol, shares, price, type } = transaction;
     console.log('Adding transaction');
     user.transactions.push(transaction);
-    if (user.portfolio[`${transaction.symbol}`]) {
-        user.portfolio[`${transaction.symbol}`] += transaction.type === 'buy' ? transaction.shares : (-1) * transaction.shares;
+    if (user.portfolio[`${symbol}`]) {
+        user.portfolio[`${symbol}`] += type === 'buy' ? shares : (-1) * shares;
+        user.cashBalance += type === 'buy' ? (-1) * shares * price : shares * price;
     } else {
-        user.portfolio[`${transaction.symbol}`] = transaction.shares;
+        user.portfolio[`${symbol}`] = shares;
+        user.cashBalance -= shares * price;
     }
     console.log(user);
-    const update = await user.updateOne({transactions: user.transactions, portfolio: user.portfolio})
+    const update = await user.updateOne(user)
     console.log(update);
     return update;
 }
