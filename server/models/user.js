@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const TOKEN_KEY = process.env.JWT_SECRET;
+const jwt = require('jsonwebtoken');
 
 const User = new Schema(
     {
@@ -15,6 +17,16 @@ const User = new Schema(
     { minimize: false }, // enables empty portfolio
     { timestamps: true }
 );
+
+User.methods.generateToken = async function () {
+    const user = this;
+    const payload = {
+        _id: user._id,
+        email: user.email
+    }
+    const token = await jwt.sign(payload, TOKEN_KEY);
+    return token;
+}
 
 User.methods.addTransaction = async function (transaction) {
     const user = this;

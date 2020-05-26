@@ -1,2 +1,4 @@
+.env
+
 # server Node modules
 /node_modules

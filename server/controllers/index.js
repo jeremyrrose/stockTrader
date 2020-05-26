@@ -15,9 +15,9 @@ const register = async (req, res) => {
     try {
         const user = await new User(reqUser);
         await user.save();
-        return res.status(201).json({
-            user
-        });
+        const token = await user.generateToken();
+        console.log(token);
+        return res.status(201).json({token});
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
