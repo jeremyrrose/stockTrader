@@ -16,8 +16,7 @@ const register = async (req, res) => {
         const user = await new User(reqUser);
         await user.save();
         const token = await user.generateToken();
-        console.log(token);
-        return res.status(201).json({token});
+        return res.status(201).json({ token });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }
@@ -28,11 +27,8 @@ const login = async (req, res) => {
 		const { email, password } = req.body;
 		const user = await User.findOne({ email: email });
 		if (await bcrypt.compare(password, user.password)) {
-			const payload = {
-				id: user.id,
-				email: user.email
-			}
-			return res.status(201).json({ payload });
+			const token = await user.generateToken();
+			return res.status(200).json({ token });
 		} else {
 			res.status(401).json({ error: 'Username and password do not match.'});
 		}

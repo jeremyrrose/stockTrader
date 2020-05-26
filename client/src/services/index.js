@@ -11,3 +11,15 @@ export const register = async (userData) => {
         throw error
     }
 }
+
+export const login = async (userData) => {
+    try {
+        const resp = await Api.post('/login', userData);
+        if (resp.status == 200) {
+            localStorage.setItem('token', resp.data.token)
+        }
+        return resp;
+    } catch (error) {
+        throw error
+    }
+}
