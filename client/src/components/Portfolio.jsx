@@ -1,4 +1,5 @@
 import React from 'react';
+import PortfolioItem from './PortfolioItem';
 import { portfolio } from '../services';
 
 class Portfolio extends React.Component {
@@ -24,13 +25,8 @@ class Portfolio extends React.Component {
 
     render() {
 
-        const portfolio = Object.keys(this.props.portfolio).map((key, index) => {
-            return (<div className="portfolioItem" key={index}>
-                <div className="symbol">{key}</div>
-                <div className="numShares">{this.props.portfolio[key]}</div>
-            </div>)
-        })
-
+        const portfolio = Object.keys(this.props.portfolio).map((key, index) => <PortfolioItem key={index} symbol={key} numShares={this.props.portfolio[key]} />)
+   
         return(
             <div>
                 {this.props.portfolio && portfolio}

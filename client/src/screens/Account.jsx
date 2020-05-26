@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Portfolio from '../components/Portfolio';
 import Transactions from '../components/Transactions';
 import Console from '../components/Console';
-import { account } from './../services';
+import { account, checkStock } from './../services';
 
 class Account extends React.Component {
 
@@ -21,6 +21,11 @@ class Account extends React.Component {
 
     componentDidMount() {
         this.setAccount();
+    }
+
+    checkStock = async (symbol) => {
+        const resp = await checkStock(symbol);
+        return resp.data;
     }
 
     setAccount = async () => {
@@ -50,7 +55,7 @@ class Account extends React.Component {
             <>
                 <Header setTab={this.setTab} />
                 {view}
-                <Console cashBalance={this.state.cashBalance} portfolio={this.state.portfolio} setAccount={this.setAccount} />
+                <Console cashBalance={this.state.cashBalance} portfolio={this.state.portfolio} checkStock={this.checkStock} setAccount={this.setAccount} />
             </>
         )
     }

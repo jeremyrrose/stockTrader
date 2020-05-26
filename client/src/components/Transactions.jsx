@@ -33,6 +33,7 @@ class Transactions extends React.Component {
                     <div className="date">{trans.createdAt}</div>
                     <div className="symbol">{trans.symbol}</div>
                     <div className="numShares">{trans.shares}</div>
+                    <div className="transPrice">{trans.price}</div>
                     <div className="transType">{trans.type}</div>
                 </div>
             )
