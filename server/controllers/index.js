@@ -24,8 +24,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
 	try {
-        console.log(req.headers);
-        const _id = await User.findByToken(req.headers.authorization.substr(7));
 		const { email, password } = req.body;
 		const user = await User.findOne({ email: email });
 		if (await bcrypt.compare(password, user.password)) {
@@ -59,7 +57,7 @@ const newTransaction = async (req, res) => {
 
 const viewTransactions = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.body.user });
+        const user = await User.findByToken(req.headers.authorization.substr(7));
         const transactions = await Transaction.find({ _id: user.transactions }, { symbol: 1, price: 1, shares: 1, type: 1, createdAt: 1, _id: 0 })
         res.status(200).json(transactions);
     } catch (error) {
@@ -69,7 +67,7 @@ const viewTransactions = async (req, res) => {
 
 const viewPortfolio = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.body.user });
+        const user = await User.findByToken(req.headers.authorization.substr(7));
         res.status(200).json({ cashBalance: user.cashBalance, portfolio: user.portfolio });
     } catch (error) {
         return res.status(500).json({ error: error.message });

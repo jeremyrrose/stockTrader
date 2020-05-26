@@ -21,7 +21,6 @@ const User = new Schema(
 User.statics.findByToken = async function (token) {
     const data = await jwt.verify(token, TOKEN_KEY);
     const user = await this.findOne({_id: data._id});
-    console.log(user);
     return user;
 }
 
