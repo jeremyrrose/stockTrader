@@ -3,6 +3,9 @@ const User = require('../models/user');
 const Transaction = require('../models/transaction');
 
 const register = async (req, res) => {
+    if (await User.findOne({email: req.body.email})) {
+        return res.status(205).send();
+    }
     const reqUser = {
         name: req.body.name,
         email: req.body.email,
