@@ -64,6 +64,21 @@ class Console extends React.Component {
         }
     }
 
+    sharesChange = async (e) => {
+        this.handleChange(e);
+        console.log(Number(this.state.shares));
+        if (this.state.shares && isNaN(this.state.shares)) {
+            console.log(typeof(Number(this.state.shares)));
+            this.setState({
+                error: 'Please enter a whole number of shares.'
+            })
+        } else if (this.state.error == 'Please enter a whole number of shares.') {
+            this.setState({
+                error: null
+            })
+        }
+    }
+
     setBuy = (buy=true) => {
         this.setState({
             buy: buy
@@ -84,15 +99,25 @@ class Console extends React.Component {
             type: this.state.buy ? 'buy' : 'sell'
         }
 
+        const error = this.state.error ? (
+            <div className="symbolError">
+                {this.state.error}
+            </div>
+        ) : null;
+
         const info = this.state.error ? null :
             (
                 <div className="info">
-                    <div className="currentSymbol">
-                        Symbol: {this.state.symbol.toUpperCase()}
-                    </div>
-                    <div className="currentPrice">
-                        Current price: {this.state.price}
-                    </div>
+                    {this.state.symbol && (
+                        <>    
+                            <div className="currentSymbol">
+                                Symbol: {this.state.symbol.toUpperCase()}
+                            </div>
+                            <div className="currentPrice">
+                                Current price: {this.state.price}
+                            </div>
+                        </>
+                    )}
                     {this.state.shares && (
                         <div className="cost">
                             Price for {this.state.shares} shares: {this.state.price * this.state.shares}
@@ -101,26 +126,32 @@ class Console extends React.Component {
                 </div>
             )
 
+        const submitButton = this.state.error ?
+            (<button type="button" className="stop" >Please correct errors</button>) :
+            (<button type="button" className="go" onClick={() => this.makeTransaction(fakeTransaction)} >Make Transaction</button>)
+
         return(
-            <div>
+            <div className="console">
                 <div className="cashBalance">
                     Cash: ${this.props.cashBalance}
                 </div>
                 <div>
-                    <label htmlFor='symbol'>Symbol: </label>
+                    <label htmlFor='symbol'>Stock Symbol</label>
                     <input type='text' name='symbol' value={this.state.symbol} onChange={(e) => this.symbolChange(e)}/>
                 </div>
-                <div className="symbolError">
-                    {this.state.error}
-                </div>
+                {error}
                 <div>
-                    <label htmlFor='shares'>Shares: </label>
-                    <input type='text' name='shares' value={this.state.shares} onChange={(e) => this.handleChange(e)}/>
+                    <label htmlFor='shares'>Number of Shares</label>
+                    <input type='text' name='shares' value={this.state.shares} onChange={(e) => this.sharesChange(e)}/>
                 </div>
                 {info}
-                <button type="button" onClick={() => this.setBuy()}>Buy</button>
-                <button type="button" onClick={() => this.setBuy(false)}>Sell</button>
-                <button type="button" onClick={() => this.makeTransaction(fakeTransaction)} >MAKE IT</button>
+                <div className="buyControl">
+                    <button type="button" className={`buy ${this.state.buy ? 'on' : ''}`} onClick={() => this.setBuy()}>Buy</button>
+                    <button type="button" className={`sell ${this.state.buy ? '' : 'on'}`}onClick={() => this.setBuy(false)}>Sell</button>
+                </div>
+                <div className="makeTransaction">
+                   {submitButton}
+                </div>
             </div>
         )
     }

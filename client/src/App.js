@@ -4,6 +4,7 @@ import Register from './screens/Register';
 import Login from './screens/Login';
 import Account from './screens/Account';
 import './App.css';
+import './styles/app.scss';
 
 class App extends React.Component {
 

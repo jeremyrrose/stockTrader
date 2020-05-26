@@ -53,9 +53,11 @@ class Account extends React.Component {
 
         return(
             <>
-                <Header setTab={this.setTab} />
-                {view}
-                <Console cashBalance={this.state.cashBalance} portfolio={this.state.portfolio} checkStock={this.checkStock} setAccount={this.setAccount} />
+                <Header setTab={this.setTab} tab={this.state.tab} />
+                <div className="accountBody">
+                    {view}
+                    <Console cashBalance={this.state.cashBalance} portfolio={this.state.portfolio} checkStock={this.checkStock} setAccount={this.setAccount} />
+                </div>
             </>
         )
     }

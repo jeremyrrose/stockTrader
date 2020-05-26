@@ -1,0 +1,162 @@
+body {
+    font-family: 'Ubuntu', sans-serif;
+    text-align: left;
+}
+
+button {
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 26px;
+    background: transparent;
+    border: 0px;
+}
+
+.App {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0 20px 0;
+
+    button {
+
+        &.on {
+            color: blue;
+        }
+    }
+}
+
+.accountBody {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .portfolio {
+
+        text-align: left;
+        flex-grow: 10;
+
+        h3 {
+            font-size: 3em;
+        }
+
+        .portfolioItem {
+            display: grid;
+            grid-template-columns: 10fr 20fr 30fr 40fr;
+            padding: 10px;
+            margin: 0 0 10px 0;
+
+            &.up {
+                background: rgba(227, 255, 230, .8);
+            }
+
+            &.down {
+                background: rgba(255, 196, 196, .8);
+            }
+
+            &.null {
+                background: rgba(220,220,220, .8);
+            }
+
+            div {
+                text-align: left;
+            }
+
+            .symbol {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .console {
+        width: 400px;
+        height: 70vh;
+        margin: 100px 0 0 30px;
+        padding: 0 0 0 30px;
+        border-left: 3px solid rgba(220,220,220, 1);
+
+        .cashBalance {
+            font-weight: bold;
+            font-size: 2.6em;
+            margin: 0 0 30px 0;
+        }
+
+        div {
+
+            position: relative;
+
+            input {
+                width: 100%;
+                padding: 8px 20px;
+                border-radius: 4px;
+                margin: 0 0 20px 0;
+                font-size: 1.2em;
+            }
+
+            label {
+                position: absolute;
+                background: white;
+                top: -12px;
+                left: 8px;
+            }
+        }
+
+        .symbolError {
+            margin: 14px 0 30px 0;
+            color: red;
+        }
+
+        .buyControl {
+            display: flex;
+            justify-content: flex-end;
+
+            button {
+                font-size: 1.4em;
+                margin-left: 10px;
+                background: rgba(220,220,220, 1);
+    
+                &.sell.on {
+                    background: rgba(227, 255, 230, 1);
+                    box-shadow: 4px 4px rgba(220,220,220, 1);
+                }
+    
+                &.buy.on {
+                    background: rgba(255, 196, 196, 1);
+                    box-shadow: 4px 4px rgba(220,220,220, 1);
+                }
+            }
+        }
+
+        .makeTransaction {
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: flex-end;
+
+            .go {
+                background: lightblue;
+            }
+
+            .stop {
+                background: red;
+                cursor: not-allowed;
+            }
+
+            .error {
+                background: coral;
+            }
+
+        }
+
+    }
+
+}
+
+  

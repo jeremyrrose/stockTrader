@@ -28,7 +28,8 @@ class Portfolio extends React.Component {
         const portfolio = Object.keys(this.props.portfolio).map((key, index) => <PortfolioItem key={index} symbol={key} numShares={this.props.portfolio[key]} />)
    
         return(
-            <div>
+            <div className="portfolio">
+                <h3>Portfolio</h3>
                 {this.props.portfolio && portfolio}
             </div>
         )

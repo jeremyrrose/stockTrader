@@ -4,8 +4,8 @@ const Header = (props) => {
 
     return(
         <div className="header">
-            <button type="button" onClick={(e) => props.setTab('portfolio')} >Portfolio</button>
-            <button type="button" onClick={(e) => props.setTab('transactions')} >Transactions</button>
+            <button type="button" className={props.tab == 'portfolio' ? 'on' : ''} onClick={(e) => props.setTab('portfolio')} >Portfolio</button>
+            <button type="button" className={props.tab == 'transactions' ? 'on' : ''} onClick={(e) => props.setTab('transactions')} >Transactions</button>
         </div>
     )
 }
