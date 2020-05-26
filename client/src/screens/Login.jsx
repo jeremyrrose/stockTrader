@@ -28,6 +28,7 @@ class Login extends React.Component {
                 error: 'Invalid login.'
             })
         }
+        this.props.setUser({id: resp.data.userId, name: resp.data.userName});
       }
 
     render() {

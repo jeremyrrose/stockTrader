@@ -1,0 +1,13 @@
+import React from 'react';
+
+const Header = (props) => {
+
+    return(
+        <div className="header">
+            <button type="button" onClick={(e) => props.setTab('portfolio')} >Portfolio</button>
+            <button type="button" onClick={(e) => props.setTab('transactions')} >Transactions</button>
+        </div>
+    )
+}
+
+export default Header;

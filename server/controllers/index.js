@@ -28,7 +28,7 @@ const login = async (req, res) => {
 		const user = await User.findOne({ email: email });
 		if (await bcrypt.compare(password, user.password)) {
 			const token = await user.generateToken();
-			return res.status(200).json({ token });
+			return res.status(200).json({ token: token, userId: user._id, userName: user.name });
 		} else {
 			res.status(401).json({ error: 'Username and password do not match.'});
 		}
