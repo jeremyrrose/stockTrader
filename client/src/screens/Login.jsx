@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { login } from './../services';
 
 class Login extends React.Component {
@@ -27,8 +28,10 @@ class Login extends React.Component {
             this.setState({
                 error: 'Invalid login.'
             })
+        } else {
+            this.props.setUser({id: resp.data.userId, name: resp.data.userName});
+            this.props.history.push(`/account`);
         }
-        this.props.setUser({id: resp.data.userId, name: resp.data.userName});
       }
 
     render() {
@@ -51,4 +54,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);

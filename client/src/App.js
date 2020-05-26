@@ -22,6 +22,10 @@ class App extends React.Component {
     })
   }
 
+  setAccount = () => {
+
+  }
+
   render() {
 
     const account = this.state.userId ? (<Account userId={this.state.userId} />) : (<Login setUser={this.setUser} />)

@@ -37,9 +37,19 @@ const login = async (req, res) => {
 	}
 }
 
+const account = async (req, res) => {
+    try {
+        const user = await User.findByToken(req.headers.authorization.substr(7));
+        const transactions = await Transaction.find({ _id: user.transactions }, { symbol: 1, price: 1, shares: 1, type: 1, createdAt: 1, _id: 0 });
+        res.status(200).json({name: user.name, email: user.email, cashBalance: user.cashBalance, portfolio: user.portfolio, transactions: transactions});
+    } catch (error) {
+        throw error;
+    }
+}
+
 const newTransaction = async (req, res) => {
     try {
-        const user = await User.findOne({ _id: req.body.user });
+        const user = await User.findByToken(req.headers.authorization.substr(7));
         const transaction = await new Transaction(req.body);
         if (await transaction.save()) {
             if (await user.addTransaction(transaction)) {
@@ -77,6 +87,7 @@ const viewPortfolio = async (req, res) => {
 module.exports = {
     register,
     login,
+    account,
     newTransaction,
     viewTransactions,
     viewPortfolio

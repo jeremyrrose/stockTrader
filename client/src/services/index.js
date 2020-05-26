@@ -27,6 +27,15 @@ export const login = async (userData) => {
     }
 }
 
+export const account = async () => {
+    try {
+        const resp = await Api.get('/account');
+        return resp;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const portfolio = async () => {
     try {
         // const resp = await Api.post('/portfolio', {user: '5ecc20a308676050d7abdaed'});
