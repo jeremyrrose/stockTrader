@@ -18,6 +18,13 @@ const User = new Schema(
     { timestamps: true }
 );
 
+User.statics.findByToken = async function (token) {
+    const data = await jwt.verify(token, TOKEN_KEY);
+    const user = await this.findOne({_id: data._id});
+    console.log(user);
+    return user;
+}
+
 User.methods.generateToken = async function () {
     const user = this;
     const payload = {

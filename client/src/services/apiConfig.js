@@ -9,10 +9,16 @@ const apiUrl = 'http://localhost:3000';
 
 const Api = Axios.create({
   baseURL: apiUrl,
-//   headers: {
-// 		Authorization: `Bearer ${JwtToken()}`,
-//     'Access-Control-Allow-Origin': '*'
-//   }
+  headers: {
+		Authorization: `Bearer ${JwtToken()}`,
+    'Access-Control-Allow-Origin': '*'
+  }
 })
+
+export const changeHeader = () => {
+  console.log(JwtToken());
+  Api.defaults.headers['Authorization'] = `Bearer ${JwtToken()}`;
+  console.log(Api.defaults.headers)
+}
 
 export default Api

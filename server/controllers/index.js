@@ -24,6 +24,8 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
 	try {
+        console.log(req.headers);
+        const _id = await User.findByToken(req.headers.authorization.substr(7));
 		const { email, password } = req.body;
 		const user = await User.findOne({ email: email });
 		if (await bcrypt.compare(password, user.password)) {
