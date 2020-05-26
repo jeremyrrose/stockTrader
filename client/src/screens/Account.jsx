@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Portfolio from '../components/Portfolio';
 import Transactions from '../components/Transactions';
+import Console from '../components/Console';
 import { account } from './../services';
 
 class Account extends React.Component {
@@ -43,12 +44,13 @@ class Account extends React.Component {
 
     render() {
 
-        const view = this.state.tab == 'transactions' ? (<Transactions />) : (<Portfolio />);
+        const view = this.state.tab == 'transactions' ? (<Transactions transactions={this.state.transactions} />) : (<Portfolio portfolio={this.state.portfolio} />);
 
         return(
             <>
                 <Header setTab={this.setTab} />
                 {view}
+                <Console cashBalance={this.state.cashBalance} portfolio={this.state.portfolio} setAccount={this.setAccount} />
             </>
         )
     }

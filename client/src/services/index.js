@@ -36,6 +36,15 @@ export const account = async () => {
     }
 }
 
+export const newTransaction = async (data) => {
+    try {
+        const resp = await Api.post('transactions/new', data);
+        return resp;
+    } catch (error) {
+        throw error;
+    }
+}
+
 export const portfolio = async () => {
     try {
         // const resp = await Api.post('/portfolio', {user: '5ecc20a308676050d7abdaed'});

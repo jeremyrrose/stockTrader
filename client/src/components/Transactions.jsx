@@ -1,5 +1,5 @@
 import React from 'react';
-import { transactions } from './../services';
+import { transactions } from '../services';
 
 class Transactions extends React.Component {
 
@@ -12,7 +12,9 @@ class Transactions extends React.Component {
     }
 
     componentDidMount() {
-        this.getTransactions();
+        this.setState({
+            transactions: this.props.transactions
+        });
     }
 
     getTransactions = async () => {
@@ -24,9 +26,21 @@ class Transactions extends React.Component {
     }
 
     render() {
+
+        const transactions = this.props.transactions.map((trans, index) => {
+            return (
+                <div className="transaction" key={index}>
+                    <div className="date">{trans.createdAt}</div>
+                    <div className="symbol">{trans.symbol}</div>
+                    <div className="numShares">{trans.shares}</div>
+                    <div className="transType">{trans.type}</div>
+                </div>
+            )
+        });
+
         return(
             <div>
-                {this.state.transactions && this.state.transactions[0] && this.state.transactions[0].symbol || null}
+                {this.props.transactions && transactions}
             </div>
         )
     }

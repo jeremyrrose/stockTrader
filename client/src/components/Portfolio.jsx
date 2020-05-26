@@ -1,18 +1,17 @@
 import React from 'react';
-import { portfolio } from './../services';
+import { portfolio } from '../services';
 
 class Portfolio extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            portfolio: [],
+            portfolio: {},
             cashBalance: 0
         }
     }
 
     componentDidMount() {
-        this.getPortfolio();
     }
 
     getPortfolio = async () => {
@@ -24,9 +23,17 @@ class Portfolio extends React.Component {
     }
 
     render() {
+
+        const portfolio = Object.keys(this.props.portfolio).map((key, index) => {
+            return (<div className="portfolioItem" key={index}>
+                <div className="symbol">{key}</div>
+                <div className="numShares">{this.props.portfolio[key]}</div>
+            </div>)
+        })
+
         return(
             <div>
-                {this.state.portfolio && this.state.portfolio.IBM || null}
+                {this.props.portfolio && portfolio}
             </div>
         )
     }

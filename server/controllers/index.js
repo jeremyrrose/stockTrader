@@ -49,8 +49,10 @@ const account = async (req, res) => {
 
 const newTransaction = async (req, res) => {
     try {
+        const transactionData = req.body;
         const user = await User.findByToken(req.headers.authorization.substr(7));
-        const transaction = await new Transaction(req.body);
+        transactionData.user = user._id;
+        const transaction = await new Transaction(transactionData);
         if (await transaction.save()) {
             if (await user.addTransaction(transaction)) {
                 return res.status(201).json(transaction);
