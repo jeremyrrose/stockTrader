@@ -86,13 +86,28 @@ class Console extends React.Component {
     }
 
     makeTransaction = async (data) => {
-        if (await newTransaction(data)){
-            this.props.setAccount();
-        }            
+        if (this.state.shares > 0 && 
+            (this.state.shares < this.props.portfolio[`${this.state.symbol.toUpperCase()}`] && !this.state.buy) ||
+            (this.props.cashBalance > this.state.shares * this.state.price && this.state.buy)
+         ) {
+            if (await newTransaction(data)){
+                this.props.setAccount();
+            }          
+        } else {
+            let error = 'Please enter a whole number of shares.';
+            if (this.state.shares > this.props.portfolio[`${this.state.symbol.toUpperCase()}`] && !this.state.buy) {
+                error = 'You may not sell more shares than you own.';
+            } else if (this.props.cashBalance < this.state.shares * this.state.price && this.state.buy) {
+                error = 'You do not have enough cash to buy that many shares.'
+            }
+            this.setState({
+                error: error
+            })
+        }  
     }
 
     render() {
-        const fakeTransaction = {
+        const transaction = {
             symbol: this.state.symbol.toUpperCase(),
             price: this.state.price,
             shares: Number(this.state.shares),
@@ -111,16 +126,19 @@ class Console extends React.Component {
                     {this.state.symbol && (
                         <>    
                             <div className="currentSymbol">
-                                Symbol: {this.state.symbol.toUpperCase()}
+                                <div className="infoLabel">Symbol</div>
+                                <div className="infoItem">{this.state.symbol.toUpperCase()}</div>
                             </div>
                             <div className="currentPrice">
-                                Current price: {this.state.price}
+                                <div className="infoLabel">Current price</div>
+                                <div className="infoItem">{this.state.price}</div>
                             </div>
                         </>
                     )}
                     {this.state.shares && (
                         <div className="cost">
-                            Price for {this.state.shares} shares: {(this.state.price * this.state.shares).toFixed(2)}
+                            <div className="infoLabel">Price for {this.state.shares} share{this.state.shares > 1 ? 's' : ''}</div>
+                            <div className="infoItem">{(this.state.price * this.state.shares).toFixed(2)}</div>
                         </div>
                     )}
                 </div>
@@ -128,7 +146,7 @@ class Console extends React.Component {
 
         const submitButton = this.state.error ?
             (<button type="button" className="stop" >Please correct errors</button>) :
-            (<button type="button" className="go" onClick={() => this.makeTransaction(fakeTransaction)} >Make Transaction</button>)
+            (<button type="button" className="go" onClick={() => this.makeTransaction(transaction)} >Make Transaction</button>)
 
         return(
             <div className="console">
