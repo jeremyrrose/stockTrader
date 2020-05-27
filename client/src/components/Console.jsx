@@ -11,7 +11,7 @@ class Console extends React.Component {
             symbol: '',
             shares: '',
             price: null,
-            buy: false,
+            buy: true,
             cashBalance: 0,
             error: null
         }
@@ -120,7 +120,7 @@ class Console extends React.Component {
                     )}
                     {this.state.shares && (
                         <div className="cost">
-                            Price for {this.state.shares} shares: {this.state.price * this.state.shares}
+                            Price for {this.state.shares} shares: {(this.state.price * this.state.shares).toFixed(2)}
                         </div>
                     )}
                 </div>
@@ -133,7 +133,7 @@ class Console extends React.Component {
         return(
             <div className="console">
                 <div className="cashBalance">
-                    Cash: ${this.props.cashBalance}
+                    Cash: ${this.props.cashBalance.toFixed(2)}
                 </div>
                 <div>
                     <label htmlFor='symbol'>Stock Symbol</label>

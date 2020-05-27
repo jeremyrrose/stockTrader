@@ -24,11 +24,10 @@ class PortfolioItem extends React.Component {
 
     render() {
         return (
-
             <div className={`portfolioItem ${this.state.compare && this.state.compare}`} >
-                <div className="symbol">{this.props.symbol}</div>
-                <div className="numShares">{this.props.numShares}</div>
-                <div className="currentPrice">{this.state.price}</div>
+                <div className="symbol">{this.props.symbol.toUpperCase()}</div>
+                <div className="numShares">{this.props.numShares} shares</div>
+                <div className="currentValue">${(this.props.numShares * this.state.price).toFixed(2)}</div>
             </div>
         )
     }

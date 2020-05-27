@@ -30,6 +30,7 @@ class Portfolio extends React.Component {
         return(
             <div className="portfolio">
                 <h3>Portfolio</h3>
+                {Object.keys(this.props.portfolio).length < 1 && (<span>You have no stocks in your portfolio.</span>)}
                 {this.props.portfolio && portfolio}
             </div>
         )

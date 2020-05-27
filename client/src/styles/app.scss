@@ -21,10 +21,59 @@ button {
     flex-direction: column;
 }
 
+.login, .register {
+    width: 440px;
+    padding: 24px;
+    border: 3px solid rgba(220,220,220, 1);
+    margin: 10vh auto;
+
+    h3 {
+        font-size: 3em;
+        margin: 10px 0 40px 0;
+    }
+
+    div {
+
+        position: relative;
+        text-align: left;
+
+        input {
+            width: 90%;
+            background: rgba(220,220,220, .4);
+            padding: 8px 20px;
+            border: 0px;
+            border-radius: 6px;
+            margin: 0 0 20px 0;
+            font-size: 1.2em;
+        }
+
+        label {
+            position: absolute;
+            background: white;
+            top: -12px;
+            left: 8px;
+        }
+    }
+
+    .loginButton {
+        text-align: right; 
+        margin: 10px 0 40px 0;
+    }
+
+    button {
+        background: rgba(227, 255, 230, .8);
+    }
+
+}
+
 .header {
     display: flex;
     justify-content: flex-end;
     margin: 20px 0 20px 0;
+
+    span {
+        font-size: 32px;
+    }
 
     button {
 
@@ -50,7 +99,8 @@ button {
 
         .portfolioItem {
             display: grid;
-            grid-template-columns: 10fr 20fr 30fr 40fr;
+            font-size: 2em;
+            grid-template-columns: 20fr 40fr 60fr;
             padding: 10px;
             margin: 0 0 10px 0;
 
@@ -72,6 +122,43 @@ button {
 
             .symbol {
                 font-weight: bold;
+            }
+
+            .currentValue {
+                text-align: right;
+            }
+        }
+    }
+
+    .transactions {
+
+        text-align: left;
+        flex-grow: 10;
+
+        h3 {
+            font-size: 3em;
+        }
+
+        .transaction {
+            display: grid;
+            font-size: 2em;
+            align-items: end;
+            grid-template-columns: 8fr 8fr 18fr 40fr 26fr;
+            background: rgba(220,220,220, .8);
+            padding: 10px;
+            margin: 0 0 10px 0;
+
+            .date, .transType {
+                font-size: 18px;
+                align-self: center;
+            }
+
+            .numShares {
+                font-size: 24px;
+            }
+            
+            .transTotal {
+                text-align: right;
             }
         }
     }

@@ -1,13 +1,14 @@
 import Api from './apiConfig';
 import Ticker from './tickerApiConfig';
-import changeHeader from './apiConfig';
+import { changeHeader, clearHeader } from './apiConfig';
 
 export const register = async (userData) => {
     try {
         const resp = await Api.post('/register', userData);
         if (resp.status == 201) {
-            localStorage.setItem('token', resp.data.token);
-            changeHeader();
+            await clearHeader();
+            await localStorage.setItem('token', resp.data.token);
+            await changeHeader();
         }
         return resp;
     } catch (error) {
@@ -19,8 +20,9 @@ export const login = async (userData) => {
     try {
         const resp = await Api.post('/login', userData);
         if (resp.status == 200) {
-            localStorage.setItem('token', resp.data.token);
-            changeHeader();
+            await clearHeader();
+            await localStorage.setItem('token', resp.data.token);
+            await changeHeader();
         }
         return resp;
     } catch (error) {

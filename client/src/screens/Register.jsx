@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import { register } from './../services';
 
 class Register extends React.Component {
@@ -50,15 +51,19 @@ class Register extends React.Component {
             this.setState({
                 error: 'This email address is already registered.'
             })
+        } else {
+            await this.props.setUser({id: resp.data.userId, name: resp.data.userName});
+            this.props.history.push(`/account`);
         }
       }
 
     render() {
         const button = this.state.match && this.state.name && this.state.email ?
             (<button type='submit'>Register</button>) :
-            (<button type='button'>Incomplete</button>)
+            (<button type='button' style={{cursor: 'not-allowed'}}>Incomplete</button>)
         return(
             <form className='login' onSubmit={this.handleSubmit}>
+                <h3>Register</h3>
                 <div>
                     <label htmlFor='name'>Your name: </label>
                     <input type='text' name='name' value={this.state.name} onChange={(e) => this.handleChange(e)}/>
@@ -75,13 +80,16 @@ class Register extends React.Component {
                     <label htmlFor='confirm'>Confirm password: </label>
                     <input type='password' name='confirm' value={this.state.confirm} onChange={(e) => this.passwordChange(e)}/>
                 </div>
-                <div>
+                <div className="loginButton">
                     {this.state.error}
                     {button}
+                </div>
+                <div>
+                    Already a member? <Link to="/login">Login here.</Link>
                 </div>
             </form>
         )
     }
 }
 
-export default Register;
+export default withRouter(Register);

@@ -16,7 +16,7 @@ const register = async (req, res) => {
         const user = await new User(reqUser);
         await user.save();
         const token = await user.generateToken();
-        return res.status(201).json({ token });
+        return res.status(201).json({ token:token, userId: user._id, userName: user.name });
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

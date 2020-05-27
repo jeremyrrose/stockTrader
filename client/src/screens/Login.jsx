@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { login } from './../services';
 
 class Login extends React.Component {
@@ -29,7 +29,7 @@ class Login extends React.Component {
                 error: 'Invalid login.'
             })
         } else {
-            this.props.setUser({id: resp.data.userId, name: resp.data.userName});
+            await this.props.setUser({id: resp.data.userId, name: resp.data.userName});
             this.props.history.push(`/account`);
         }
       }
@@ -37,6 +37,7 @@ class Login extends React.Component {
     render() {
         return(
             <form className='login' onSubmit={this.handleSubmit}>
+                <h3>Log In</h3>
                 <div>
                     <label htmlFor='email'>Email address: </label>
                     <input type='text' name='email' value={this.state.email} onChange={(e) => this.handleChange(e)}/>
@@ -45,9 +46,12 @@ class Login extends React.Component {
                     <label htmlFor='password'>Password: </label>
                     <input type='password' name='password' value={this.state.password} onChange={(e) => this.handleChange(e)}/>
                 </div>
-                <div>
+                <div className="loginButton">
                     {this.state.error}
                     <button type="submit">Log In</button>
+                </div>
+                <div>
+                    New user? <Link to="/register">Register here.</Link>
                 </div>
             </form>
         )
