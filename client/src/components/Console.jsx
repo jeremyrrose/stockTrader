@@ -87,8 +87,8 @@ class Console extends React.Component {
 
     makeTransaction = async (data) => {
         if (this.state.shares > 0 && 
-            (this.state.shares < this.props.portfolio[`${this.state.symbol.toUpperCase()}`] && !this.state.buy) ||
-            (this.props.cashBalance > this.state.shares * this.state.price && this.state.buy)
+            ((this.state.shares < this.props.portfolio[`${this.state.symbol.toUpperCase()}`] && !this.state.buy) ||
+            (this.props.cashBalance > this.state.shares * this.state.price && this.state.buy))
          ) {
             if (await newTransaction(data)){
                 this.props.setAccount();
