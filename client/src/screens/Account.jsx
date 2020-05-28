@@ -30,7 +30,6 @@ class Account extends React.Component {
 
     setAccount = async () => {
         const userData = await account();
-        console.log(userData.data);
         const { name, email, cashBalance, portfolio, transactions } = userData.data;
         this.setState({
             userName: name,

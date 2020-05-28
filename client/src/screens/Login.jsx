@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { login } from './../services';
+import { login, wakeHeroku } from './../services';
 
 class Login extends React.Component {
     constructor(props) {
@@ -12,8 +12,8 @@ class Login extends React.Component {
         }
     }
 
-    componentDidMount() {
-        
+    componentDidMount = async () => {
+        await wakeHeroku(); // wakes Heroku server; not for professional use
     }
 
     handleChange = e => {

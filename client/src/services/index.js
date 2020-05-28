@@ -92,3 +92,12 @@ export const transactions = async () => {
     }
 }
 
+// spins up the Heroku API for quicker response to user interactions
+export const wakeHeroku = async () => {
+    try {
+        const resp = await Api.get('/');
+        return resp;
+    } catch (error) {
+        throw error
+    }
+}
