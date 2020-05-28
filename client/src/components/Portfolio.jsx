@@ -46,7 +46,7 @@ class Portfolio extends React.Component {
 
     render() {
 
-        const portfolio = Object.keys(this.props.portfolio).map((key, index) => <PortfolioItem key={index} index={index} symbol={key} numShares={this.props.portfolio[key]} populateValues={this.populateValues} />)
+        const portfolio = Object.keys(this.props.portfolio).map((key, index) => <PortfolioItem key={key} index={index} symbol={key} numShares={this.props.portfolio[key]} populateValues={this.populateValues} />)
    
         return(
             <div className="portfolio">
