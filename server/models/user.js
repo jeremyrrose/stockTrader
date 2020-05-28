@@ -46,6 +46,9 @@ User.methods.addTransaction = async function (transaction) {
         user.portfolio[`${symbol}`] = shares;
         user.cashBalance -= shares * price;
     }
+    if (user.portfolio[symbol] === 0) {
+        delete user.portfolio[symbol];
+    }
     console.log(user);
     const update = await user.updateOne(user)
     console.log(update);
