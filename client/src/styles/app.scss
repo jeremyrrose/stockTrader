@@ -93,8 +93,14 @@ button {
         text-align: left;
         flex-grow: 10;
 
-        h3 {
-            font-size: 3em;
+        .portfolioHeader {
+
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+                font-size: 3em;
+            }
         }
 
         .portfolioItem {

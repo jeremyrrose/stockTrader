@@ -14,12 +14,22 @@ class PortfolioItem extends React.Component {
         this.props.symbol && this.compareStock(this.props.symbol);
     }
 
+    componentDidUpdate(prevProps) {
+        prevProps.numShares != this.props.numShares && this.populate();
+    }
+
+    populate() {
+        this.props.populateValues(this.props.index, this.state.price ? this.props.numShares * this.state.price : 0 );
+    }
+
     compareStock = async (symbol) => {
+        console.log(`${this.props.symbol} comparing`);
         const resp = await compareStock(symbol);
-        this.setState({
+        await this.setState({
             compare: resp.compare,
             price: resp.price
-        })
+        });
+        this.populate();
     }
 
     render() {
