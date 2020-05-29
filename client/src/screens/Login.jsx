@@ -23,7 +23,6 @@ class Login extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
         const resp = await login(this.state);
-        console.log(resp.data);
         if (!resp) {
             this.setState({
                 error: 'Invalid login.'

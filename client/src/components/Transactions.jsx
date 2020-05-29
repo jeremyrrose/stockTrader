@@ -19,7 +19,6 @@ class Transactions extends React.Component {
 
     getTransactions = async () => {
         const resp = await transactions();
-        console.log(resp);
         this.setState({
             transactions: resp.data
         })

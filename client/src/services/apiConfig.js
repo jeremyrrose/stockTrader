@@ -15,9 +15,7 @@ const Api = Axios.create({
 })
 
 export const changeHeader = async () => {
-  console.log(await JwtToken());
   Api.defaults.headers['Authorization'] = `Bearer ${JwtToken()}`;
-  console.log(Api.defaults.headers)
 }
 
 export const clearHeader = () => {

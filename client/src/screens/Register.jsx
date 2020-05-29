@@ -46,7 +46,6 @@ class Register extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
         const resp = await register(this.state);
-        console.log(resp.data);
         if (resp.status == 205 ) {
             this.setState({
                 error: 'This email address is already registered.'

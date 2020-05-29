@@ -23,7 +23,7 @@ class PortfolioItem extends React.Component {
     }
 
     compareStock = async (symbol) => {
-        console.log(`${this.props.symbol} comparing`);
+        // console.log(`${this.props.symbol} comparing`); // this line may be uncommented in dev environment to monitor traffic to API
         const resp = await compareStock(symbol);
         await this.setState({
             compare: resp.compare,

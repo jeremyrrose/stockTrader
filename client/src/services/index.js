@@ -41,7 +41,7 @@ export const account = async () => {
 
 export const checkStock = async (symbol) => {
     try {
-        const endpoint = symbol + '/quote/latestPrice?token=pk_b6c458508f174090a67c5dc9a5ed1408'
+        const endpoint = symbol + '/quote/latestPrice?token=pk_b6c458508f174090a67c5dc9a5ed1408'; // publishable token from IEX
         const resp = await Ticker.get(endpoint);
         return resp;
     } catch (error) {
@@ -51,10 +51,8 @@ export const checkStock = async (symbol) => {
 
 export const compareStock = async (symbol) => {
     try {
-        const endpoint = symbol + '/quote/?token=pk_b6c458508f174090a67c5dc9a5ed1408';
+        const endpoint = symbol + '/quote/?token=pk_b6c458508f174090a67c5dc9a5ed1408'; // publishable token from IEX
         const resp = await Ticker.get(endpoint);
-        console.log(resp);
-        // const compare = resp.data.latestPrice > resp.data.open ? 'up' : 'down';
         const compare = resp.data.change > 0 ? 'up' : 'down';
         const price = Number(resp.data.latestPrice).toFixed(2)
         return {compare: compare, price: price}
