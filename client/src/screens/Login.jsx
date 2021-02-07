@@ -17,21 +17,21 @@ class Login extends React.Component {
     }
 
     handleChange = e => {
-        this.setState({ [e.target.name]: e.target.value })
+        this.setState({ [e.target.name]: e.target.value, error: null })
     }
 
     handleSubmit = async event => {
         event.preventDefault();
-        const resp = await login(this.state);
-        if (!resp) {
-            this.setState({
-                error: 'Invalid login.'
-            })
-        } else {
+        try { 
+            const resp = await login(this.state);
             await this.props.setUser({id: resp.data.userId, name: resp.data.userName});
             this.props.history.push(`/account`);
+        } catch (error) {
+            this.setState({
+                error: 'Invalid login : : '
+            })
         }
-      }
+    }
 
     render() {
         return(
@@ -46,7 +46,7 @@ class Login extends React.Component {
                     <input type='password' name='password' value={this.state.password} onChange={(e) => this.handleChange(e)}/>
                 </div>
                 <div className="loginButton">
-                    {this.state.error}
+                    <span className="error">{this.state.error}</span> 
                     <button type="submit">Log In</button>
                 </div>
                 <div>
